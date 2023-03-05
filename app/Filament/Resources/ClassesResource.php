@@ -11,6 +11,8 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -25,6 +27,10 @@ class ClassesResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
+                ->required()
+                ->autofocus()
+                ->unique()
+                ->placeholder('Digite o nome da classe')
             ]);
     }
 
@@ -32,13 +38,16 @@ class ClassesResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('name')
+                ->label('Nome')
+                ->sortable()
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
