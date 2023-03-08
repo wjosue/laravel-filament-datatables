@@ -11,6 +11,7 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Columns\TextColumn;
 
 class SectionResource extends Resource
 {
@@ -41,7 +42,9 @@ class SectionResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('class.name')
                     ->sortable()
-                    ->searchable()
+                    ->searchable(),
+                TextColumn::make('students_count')->counts('students')
+                    ->label('Total de Estudantes')
             ])
             ->filters([
                 //
