@@ -39,8 +39,11 @@ class ClassesResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
-                ->label('Nome')
-                ->sortable()
+                    ->label('Nome')
+                    ->sortable(),
+                Tables\Columns\TagsColumn::make('sections.name'),
+                TextColumn::make('students_count')->counts('students')
+                    ->label('Total de Estudantes')
             ])
             ->filters([
                 //
